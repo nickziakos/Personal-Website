@@ -16,7 +16,7 @@ A static HTML/CSS website hosted with GitHub Pages. No paid domain, server, subs
 - Add new images alongside the existing assets and reference them from HTML.
 - Commit changes to `main`; GitHub Pages republishes automatically.
 
-Submitted manuscripts and ongoing work are explicitly labeled. Certificate scans and unpublished manuscripts are not included in this repository.
+Submitted manuscripts and ongoing work are explicitly labeled. Selected language certificates and award PDFs are available. Unpublished manuscripts are not included in this repository.
 
 ## Local preview
 
