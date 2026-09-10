@@ -38,14 +38,11 @@
           <p class="eyebrow">Aerospace engineering · Madrid</p>
           <h1 id="intro">Nikolaos<br /><em>Ziakos.</em></h1>
           <p class="lead">
-            I develop computational methods for the efficient design of
-            composite aircraft structures.
+            I work on accelerating and improving the fidelity of early-stage airframe design. 
+            My work focuses on automated parametric modeling, surrogate-based Bayesian optimization and large-scale multidisciplinary design of composite structures.
           </p>
           <p class="muted">
-            PhD candidate at Universidad Carlos III de Madrid, working at the
-            intersection of structural mechanics, automated modeling, and
-            machine learning.
-          </p>
+            PhD researcher at Universidad Carlos III de Madrid, Aeroelastic and Structural Design Lab. Part of the Spanish national project TIFON, funded by the Ministry of Science and Innovation. Awarded an FPU doctoral fellowship through the 2025 call.
           <div class="links">
             <a class="button" href="#research"
               >Explore my research <span aria-hidden="true">↘</span></a
@@ -87,20 +84,20 @@
               From structural mechanics to data-efficient design.
             </p>
             <p>
-              I am an aerospace engineering PhD candidate at Universidad Carlos
-              III de Madrid and a doctoral researcher in the Aeroelastic and
-              Structural Design (ASD) Lab. My work focuses on making the design
-              of composite airframes more efficient through automated
-              finite-element modeling, structural optimization, and machine
-              learning.
+              I am a PhD candidate in Aerospace Engineering at Universidad Carlos III
+              de Madrid and a doctoral researcher in the Aeroelastic and Structural
+              Design (ASD) Lab. My research focuses on improving the early-stage
+              design of composite airframes by combining structural mechanics,
+              automated parametric Finite Element (FE) modeling, and Machine Learning.
             </p>
             <p>
-              I develop computational workflows that connect aircraft geometry
-              and internal structural layouts to analysis-ready models, sizing
-              studies, and surrogate-assisted optimization. My current research
-              tackles mixed-variable design spaces where each evaluation is
-              expensive and strength and buckling constraints make feasible
-              designs difficult to find.
+              I develop computational workflows that connect aircraft geometry and
+              internal structural layouts to FE analysis and design
+              optimization. My work combines gradient-based methods with
+              Gaussian Process (GP) surrogate models and Bayesian optimization to explore
+              complex design spaces efficiently. My goal is to enable large-scale, multidisciplinary optimization
+              of the whole airframe, involving layout and composite optimization, through the combination of gradient-based methods
+              and surrogate-assisted Bayesian optimization.
             </p>
             <p>
               My background is in Mechanical Engineering and Aeronautics at the
@@ -116,12 +113,12 @@
               <li>Composite structures and aeroelastic tailoring</li>
               <li>Coupled structural layout and sizing optimization</li>
               <li>Gaussian processes and constrained Bayesian optimization</li>
-              <li>Automated finite-element modeling and analysis</li>
+              <li>Automated Finite Element (FE) modeling and analysis</li>
+              <li>Gradient-based Multidisciplinary Optimization (MDO)</li>
             </ul>
             <h3>Directions I want to explore</h3>
             <p>
-              Stacking-sequence optimization, gradient-enhanced and
-              multi-fidelity methods, physics-informed learning, and closer
+              Stacking-sequence optimization, gradient-based optimization, physics-informed ML, large-scale MDO, Bayesian Optimization and closer
               integration of aeroelastic loads and constraints.
             </p>
           </aside>
@@ -141,7 +138,7 @@
               structural analysis is expensive?
             </p>
             <p>
-              I am developing a constrained, multi-center trust-region framework
+              I am developing a constrained, multi-center Trust Region (TR) framework
               that searches layout and sizing variables together. Sparse
               Gaussian processes model structural responses, while a
               physics-informed mass residual model combines an analytical
@@ -159,8 +156,7 @@
                 Shared surrogate models support several local search regions,
                 with layout diversity used to explore distinct configurations.
                 The manuscript and accompanying technical notes are in
-                development; results are not presented here as peer-reviewed
-                findings.
+                development.
               </p>
             </details>
           </div>
@@ -189,10 +185,9 @@
             <span class="pill">Submitted manuscript</span>
             <h3>Nested layout &amp; sizing optimization</h3>
             <p>
-              A surrogate-assisted outer loop explores structural layouts, while
+              A surrogate-based outer loop explores structural layouts, while
               an inner gradient-based solver sizes each configuration. Automated
-              Python and HyperMesh TCL modeling connects design choices to
-              finite-element analysis.
+              Python and HyperMesh TCL modules generate FE models based on  design changes.
             </p>
             <div class="tags">
               <span>Gaussian processes</span><span>OptiStruct</span
@@ -568,7 +563,7 @@
     <footer>
       <div class="wrap">
         <span>© 2026 Nikolaos Ziakos</span
-        ><span>Composite structures. Computational design.</span>
+        ><span>Composite structures. Computational Mechanics. Surrogate-based Optimization. Aircraft Design. </span>
       </div>
     </footer>
   </body>
