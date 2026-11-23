@@ -13,7 +13,7 @@ A static HTML/CSS website hosted with GitHub Pages. No paid domain, server, subs
 - Edit `index.html` for biography, projects, publications, education and links.
 - Edit `styles.css` for appearance and responsive layout.
 - Replace the corresponding PDF to update the research CV or diploma thesis.
-- Add new images alongside the existing assets and reference them from HTML.
+- Research figures live in `figures/` as web-size WebP copies (titles cropped); add new images there and reference them from HTML.
 - Commit changes to `main`; GitHub Pages republishes automatically.
 
 Submitted manuscripts and ongoing work are explicitly labeled. Selected language certificates and award PDFs are available. Unpublished manuscripts are not included in this repository.

@@ -38,11 +38,13 @@
           <p class="eyebrow">Aerospace engineering · Madrid</p>
           <h1 id="intro">Nikolaos<br /><em>Ziakos.</em></h1>
           <p class="lead">
-            I work on accelerating and improving the fidelity of early-stage airframe design. 
-            My work focuses on automated parametric modeling, surrogate-based Bayesian optimization and large-scale multidisciplinary design of composite structures.
+            I work on accelerating and improving the fidelity of early-stage airframe design.
+            My work focuses on automated parametric finite-element modeling of complete airframes,
+            high-dimensional Bayesian optimization and large-scale design of composite structures.
           </p>
           <p class="muted">
             PhD researcher at Universidad Carlos III de Madrid, Aeroelastic and Structural Design Lab. Part of the Spanish national project TIFON, funded by the Ministry of Science and Innovation. Awarded an FPU doctoral fellowship through the 2025 call.
+          </p>
           <div class="links">
             <a class="button" href="#research"
               >Explore my research <span aria-hidden="true">↘</span></a
@@ -64,7 +66,7 @@
         <figure class="portrait">
           <img
             src="nikolaos-ziakos.jpeg"
-            alt="Nikolaos Ziakos at Universidad Carlos III de Madrid"
+            alt="Portrait of Nikolaos Ziakos"
             width="800"
             height="800"
           />
@@ -93,9 +95,10 @@
             <p>
               I develop computational workflows that connect aircraft geometry and
               internal structural layouts to FE analysis and design
-              optimization. My work combines gradient-based methods with
+              optimization, from single wingboxes up to global FE models of a
+              complete airframe. My work combines gradient-based methods with
               Gaussian Process (GP) surrogate models and Bayesian optimization to explore
-              complex design spaces efficiently. My goal is to enable large-scale, multidisciplinary optimization
+              high-dimensional, mixed-integer design spaces efficiently. My goal is to enable large-scale, multidisciplinary optimization
               of the whole airframe, involving layout and composite optimization, through the combination of gradient-based methods
               and surrogate-assisted Bayesian optimization.
             </p>
@@ -112,14 +115,14 @@
             <ul>
               <li>Composite structures and aeroelastic tailoring</li>
               <li>Coupled structural layout and sizing optimization</li>
-              <li>Gaussian processes and constrained Bayesian optimization</li>
-              <li>Automated Finite Element (FE) modeling and analysis</li>
+              <li>High-dimensional constrained Bayesian optimization</li>
+              <li>Automated global Finite Element (FE) models of airframes</li>
               <li>Gradient-based Multidisciplinary Optimization (MDO)</li>
             </ul>
             <h3>Directions I want to explore</h3>
             <p>
-              Stacking-sequence optimization, gradient-based optimization, physics-informed ML, large-scale MDO, Bayesian Optimization and closer
-              integration of aeroelastic loads and constraints.
+              Stacking-sequence and lamination-parameter design, gradient-based optimization of full airframe models,
+              physics-informed ML, large-scale MDO and closer integration of aeroelastic loads and constraints.
             </p>
           </aside>
         </div>
@@ -131,78 +134,287 @@
         </div>
         <article class="research">
           <div class="researchcopy">
-            <span class="pill">Current research · In progress</span>
-            <h3>Scalable Bayesian optimization<br />for composite wingboxes</h3>
+            <span class="pill">Current research · Airframe modeling</span>
+            <h3>Parametric global FE models<br />of a complete airframe</h3>
             <p class="muted">
-              How can we explore a large aircraft design space when every
-              structural analysis is expensive?
+              Can a full-aircraft structural model be rebuilt automatically
+              whenever the design changes, early enough to inform the layout?
             </p>
             <p>
-              I am developing a constrained, multi-center Trust Region (TR) framework
-              that searches layout and sizing variables together. Sparse
-              Gaussian processes model structural responses, while a
-              physics-informed mass residual model combines an analytical
-              estimate with learned corrections.
+              I am developing a Python framework that generates a global
+              finite-element model of a half airframe of a single-aisle
+              reference transport aircraft — fuselage, wing, pylon,
+              horizontal stabilizer and fin — directly from its CPACS
+              geometry definition. Planners first lay out every frame,
+              stringer, rib, spar, floor, door and cutout; HyperMesh then
+              builds and meshes the structure, and the assembled model is
+              loaded and analysed in OptiStruct.
             </p>
             <div class="tags">
-              <span>Constrained BO</span><span>Sparse Gaussian processes</span
-              ><span>Mixed-variable design</span>
+              <span>Global FE models</span><span>HyperMesh Python API</span
+              ><span>OptiStruct</span><span>AVL / VSPAERO</span
+              ><span>Open CASCADE</span>
             </div>
             <details>
-              <summary>Methodology &amp; current scope</summary>
+              <summary>Pipeline &amp; current scope</summary>
               <p>
-                The ongoing study compares global, single-center and
-                multi-center strategies under strength and buckling constraints.
-                Shared surrogate models support several local search regions,
-                with layout diversity used to explore distinct configurations.
-                The manuscript and accompanying technical notes are in
-                development.
+                The model has around 300,000 nodes and 335,000 shell elements,
+                with beam stiffeners, joints between the parts, and a mass
+                model of systems, payload and fuel. Aerodynamic loads for
+                trimmed symmetric manoeuvres come from a vortex-lattice (AVL)
+                or panel-method (OpenVSP/VSPAERO) model, and the analysis
+                covers free vibration, static strength, linear buckling and
+                cabin pressure. Geometry can be built natively in HyperMesh or
+                exported as STEP sheets from Open CASCADE. A complete rebuild
+                and analysis runs unattended in about two hours.
+              </p>
+              <p>
+                The structure has received an initial fully stressed sizing;
+                coupling it with formal optimization and static aeroelastic
+                load relief is the next step. The framework builds on the
+                parametric approach presented at EASN 2025 and AIAA SciTech 2026.
+                The code is in a private GitHub repository.
               </p>
             </details>
           </div>
           <figure>
             <a
-              href="wing-model-loads.png"
+              href="figures/airframe-by-part.webp"
               target="_blank"
               rel="noreferrer"
-              aria-label="Open full-size wing model"
+              aria-label="Open full-size airframe model"
               ><img
-                src="wing-model-loads.png"
-                alt="Complete wingbox finite-element model with support boundary conditions, load-transfer nodes and concentrated fuel masses"
-                width="2011"
-                height="1083"
+                src="figures/airframe-by-part.webp"
+                alt="Half airframe finite-element mesh coloured by part: fuselage with window and door cutouts, wing, engine pylon, horizontal stabilizer and fin"
+                width="1800"
+                height="898"
                 loading="lazy"
             /></a>
             <figcaption>
-              Wingbox model with boundary conditions, load-transfer nodes and
-              concentrated fuel masses. Select the figure to view it at full
-              size.
+              Automatically generated half-airframe FE model, coloured by
+              part. Select a figure to view it at full size.
+            </figcaption>
+          </figure>
+        </article>
+        <div class="gallery">
+          <figure>
+            <a href="figures/airframe-structure.webp" target="_blank" rel="noreferrer"
+              ><img
+                src="figures/airframe-structure.webp"
+                alt="Airframe structure without skins seen from the symmetry plane: frames, stringers, floors, keel, spars, ribs and fittings"
+                width="1800"
+                height="974"
+                loading="lazy"
+            /></a>
+            <figcaption>Internal structure without skins: frames, stringers, floors, keel, spars and ribs.</figcaption>
+          </figure>
+          <figure>
+            <a href="figures/airframe-centre-section.webp" target="_blank" rel="noreferrer"
+              ><img
+                src="figures/airframe-centre-section.webp"
+                alt="Mesh of the centre fuselage and wing root without skins, showing frames, the centre wing box, cabin and cargo floors and the keel"
+                width="1461"
+                height="1322"
+                loading="lazy"
+            /></a>
+            <figcaption>Centre fuselage and wing-root mesh, including the centre wing box and floors.</figcaption>
+          </figure>
+          <figure>
+            <a href="figures/airframe-wingbox-plan.webp" target="_blank" rel="noreferrer"
+              ><img
+                src="figures/airframe-wingbox-plan.webp"
+                alt="Planned wing box layout in plan view with spars, ribs, false rear spar, stringer run-outs, tank bays and three property regions"
+                width="1800"
+                height="985"
+                loading="lazy"
+            /></a>
+            <figcaption>Planned wing-box layout: spars, ribs, stringer run-outs, tank bays and property regions.</figcaption>
+          </figure>
+        </div>
+        <article class="research">
+          <div class="researchcopy">
+            <span class="pill">Current research · In progress</span>
+            <h3>High-dimensional Bayesian optimization<br />of wing layout and laminates</h3>
+            <p class="muted">
+              How can we optimize structural layout and composite laminates
+              together when every evaluation needs a new FE mesh?
+            </p>
+            <p>
+              Changing the number of ribs or stringers changes the mesh, so no
+              gradients exist with respect to these variables. I am developing
+              a multi-trust-region Bayesian optimization framework that treats
+              layout and laminate variables jointly, with sparse multi-output
+              Gaussian-process models of the strength and buckling
+              constraints.
+            </p>
+            <div class="tags">
+              <span>Multi-trust-region BO</span><span>Multi-output sparse GPs</span
+              ><span>Lamination parameters</span><span>Mixed-integer design</span>
+            </div>
+            <details>
+              <summary>Methodology &amp; current scope</summary>
+              <p>
+                The composite wingbox is described by regional layout variables
+                (rib and separate upper and lower stringer counts), metallic rib
+                thicknesses and either 72 smeared ply-thickness variables or 144
+                variables that add bending lamination parameters to represent
+                the stacking sequence. Element strains, rib stresses and
+                buckling factors are aggregated regionally and enforced as
+                strict constraints. Several trust regions with layout-diverse
+                centres share the surrogate models and contribute candidates to
+                each parallel batch, and stacking sequences are retrieved to
+                satisfy manufacturing ply-book rules.
+              </p>
+              <p>
+                Preliminary campaigns find feasible designs much lighter than
+                the best initial sample with both laminate descriptions. A
+                comparison of the two under the same manufacturing rules, and
+                against a global mixed-integer solver, is in progress for AIAA
+                AVIATION 2027.
+              </p>
+              <figure class="inline-figure">
+                <a href="figures/hd-laminate-designs.webp" target="_blank" rel="noreferrer"
+                  ><img
+                    src="figures/hd-laminate-designs.webp"
+                    alt="Exploded views of two optimized wingbox designs coloured by laminate and rib thickness, smeared laminates on the left and lamination parameters on the right"
+                    width="1800"
+                    height="903"
+                    loading="lazy"
+                /></a>
+                <figcaption>
+                  Exploded thickness distributions of preliminary designs with
+                  smeared laminates (left) and lamination parameters (right).
+                </figcaption>
+              </figure>
+            </details>
+          </div>
+          <figure>
+            <a
+              href="figures/hd-wingbox-model.webp"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open full-size wingbox model"
+              ><img
+                src="figures/hd-wingbox-model.webp"
+                alt="Composite wingbox finite-element model with load-transfer nodes and fuel masses, and a detail of the root boundary conditions"
+                width="1800"
+                height="913"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              Wingbox FE model with load-transfer nodes, fuel masses and root
+              boundary conditions.
             </figcaption>
           </figure>
         </article>
         <div class="projects">
           <article class="project">
-            <span class="pill">Submitted manuscript</span>
+            <span class="pill">AIAA SciTech 2027 · Forthcoming</span>
+            <h3>Multi-trust-region BO for coupled layout &amp; sizing</h3>
+            <p>
+              Joint optimization of rib count, stringer count, spar-cap width
+              and 75 ply-count and rib-thickness variables, with every
+              candidate evaluated by a regenerated FE model. Sparse variational
+              GPs, including multi-output models and a residual correction to
+              a geometry-based mass estimate, drive constrained Thompson
+              sampling or a smoothed merit expected improvement in single or
+              multiple concurrent trust regions.
+            </p>
+            <figure class="project-figure">
+              <a href="figures/mtr-bo-thickness.webp" target="_blank" rel="noreferrer"
+                ><img
+                  src="figures/mtr-bo-thickness.webp"
+                  alt="Exploded thickness distributions of the multi-trust-region design and a reference global-solver design on a common colour scale"
+                  width="1800"
+                  height="568"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                Thickness distributions of the multi-trust-region design (left)
+                and a reference global-solver design (right).
+              </figcaption>
+            </figure>
+            <div class="tags">
+              <span>78 mixed variables</span><span>SCBO / SMEI</span
+              ><span>Sparse variational GPs</span>
+            </div>
+            <details>
+              <summary>About the work</summary>
+              <p>
+                <em
+                  >Multi-Trust-Region Bayesian Optimization for Coupled Layout
+                  and Sizing of a Composite Wingbox</em
+                >, N. Ziakos and A. Cini. Multi-region variants reached lighter
+                designs than their single-region counterparts and a global
+                acquisition, and the best multi-region variant reached a lower
+                mass than a global mixed-integer solver with the same
+                evaluation budget. Publication details will be added after the
+                forum.
+              </p>
+            </details>
+          </article>
+          <article class="project">
+            <span class="pill">Composite Structures · 2027 · Open access</span>
             <h3>Nested layout &amp; sizing optimization</h3>
             <p>
-              A surrogate-based outer loop explores structural layouts, while
-              an inner gradient-based solver sizes each configuration. Automated
-              Python and HyperMesh TCL modules generate FE models based on  design changes.
+              A Gaussian-process outer loop explores the wingbox layout (rib
+              count, stringer count and spar-cap width), while OptiStruct
+              gradient-based sizing optimizes each configuration. A staged
+              multi-run sizing strategy reduced structural mass by up to
+              450&nbsp;kg relative to the first feasible sizing result and
+              reduced run-to-run variability.
             </p>
+            <figure class="project-figure">
+              <a href="figures/nested-bo-convergence.webp" target="_blank" rel="noreferrer"
+                ><img
+                  src="figures/nested-bo-convergence.webp"
+                  alt="Best feasible structural mass against layout evaluations for nine Bayesian optimization studies and three MIDACO runs"
+                  width="1800"
+                  height="1110"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                Best feasible mass against layout evaluations, BO versus the
+                global MIDACO solver. Ziakos &amp; Cini (2027), CC BY 4.0.
+              </figcaption>
+            </figure>
             <div class="tags">
               <span>Gaussian processes</span><span>OptiStruct</span
               ><span>Python / TCL</span>
             </div>
             <details>
-              <summary>About the submitted work</summary>
+              <summary>About the published work</summary>
               <p>
                 <em
-                  >Nested Surrogate-Based Layout and Size Optimization of
-                  Composite Wingbox Structures</em
-                >, N. Ziakos and A. Cini. Submitted to Elsevier / Composite
-                Structures. The study investigates noise-aware Bayesian
-                optimization and a staged multi-run sizing procedure.
-                Publication details will be added after an editorial decision.
+                  >Nested surrogate-based layout and size optimization of
+                  composite wingbox structures</em
+                >, N. Ziakos and A. Cini, Composite Structures 402 (2027)
+                121103. Three Bayesian optimization repetitions for each of
+                three initial datasets, with 30 layout evaluations per study,
+                all reduced the initial best mass; selected layouts typically
+                had 50&nbsp;mm spar caps and 13–14 stringers. Results were
+                benchmarked against a global gradient-free optimizer.
+              </p>
+              <figure class="inline-figure">
+                <a href="wing-model-loads.png" target="_blank" rel="noreferrer"
+                  ><img
+                    src="wing-model-loads.png"
+                    alt="Complete wingbox finite-element model with support boundary conditions, load-transfer nodes and concentrated fuel masses"
+                    width="2011"
+                    height="1083"
+                    loading="lazy"
+                /></a>
+                <figcaption>
+                  Wingbox model with boundary conditions, load-transfer nodes
+                  and concentrated fuel masses.
+                </figcaption>
+              </figure>
+              <p>
+                <a
+                  class="textlink"
+                  href="https://doi.org/10.1016/j.compstruct.2026.121103"
+                  >Read the article ↗</a
+                >
               </p>
             </details>
           </article>
@@ -244,17 +456,37 @@
           <article class="paper">
             <div>
               <h3>
-                <a href="https://doi.org/10.2514/6.2026-0586"
-                  >Parametric Framework for Automated Structural Layout Modeling
-                  and Optimization of Composite Airframe</a
+                <a href="https://doi.org/10.1016/j.compstruct.2026.121103"
+                  >Nested surrogate-based layout and size optimization of
+                  composite wingbox structures</a
                 >
               </h3>
               <p>N. Ziakos · A. Cini</p>
-              <p>AIAA SciTech 2026 Forum · Conference paper · Presented</p>
+              <p>
+                Composite Structures 402, 121103 · 2027 · Journal article ·
+                <span class="oa">Open access</span>
+              </p>
+            </div>
+            <a
+              href="https://doi.org/10.1016/j.compstruct.2026.121103"
+              aria-label="Read Nested surrogate-based layout and size optimization of composite wingbox structures"
+              >Read paper ↗</a
+            >
+          </article>
+          <article class="paper">
+            <div>
+              <h3>
+                <a href="https://doi.org/10.2514/6.2026-0586"
+                  >Parametric Framework for Automated Structural Layout Modelling
+                  and Optimisation of Composite Airframe</a
+                >
+              </h3>
+              <p>N. Ziakos · A. Cini</p>
+              <p>AIAA SciTech 2026 Forum, Orlando, FL · Conference paper · January 2026</p>
             </div>
             <a
               href="https://doi.org/10.2514/6.2026-0586"
-              aria-label="Read Parametric Framework for Automated Structural Layout Modeling and Optimization of Composite Airframe"
+              aria-label="Read Parametric Framework for Automated Structural Layout Modelling and Optimisation of Composite Airframe"
               >Read paper ↗</a
             >
           </article>
@@ -292,6 +524,24 @@
               >Read paper ↗</a
             >
           </article>
+        </div>
+        <div class="forthcoming">
+          <h3>Forthcoming</h3>
+          <p>
+            <strong
+              >Multi-Trust-Region Bayesian Optimization for Coupled Layout and
+              Sizing of a Composite Wingbox</strong
+            ><br />N. Ziakos · A. Cini · AIAA SciTech 2027 Forum · Conference
+            paper
+          </p>
+          <p>
+            <strong
+              >Trust-Region Bayesian Optimization for Coupled Layout and
+              Laminate Optimization of Wing Structures Including
+              Stacking-Sequence Constraints</strong
+            ><br />N. Ziakos · A. Cini · AIAA AVIATION 2027 Forum · Extended
+            abstract
+          </p>
         </div>
         <div class="links">
           <a class="textlink" href="https://orcid.org/0009-0007-5055-6575"
@@ -477,7 +727,7 @@
               <h4>Structural modeling &amp; analysis</h4>
               <p>
                 Altair HyperMesh / OptiStruct<br />MSC Nastran / Patran<br />Ansys
-                APDL
+                APDL<br />AVL · OpenVSP / VSPAERO · Open CASCADE
               </p>
               <span
                 >Parametric models, composite properties, structural analysis
@@ -486,7 +736,7 @@
             </article>
             <article>
               <h4>Programming &amp; automation</h4>
-              <p>Python · MATLAB<br />HyperMesh TCL · C</p>
+              <p>Python · MATLAB<br />HyperMesh Python API &amp; TCL · C</p>
               <span
                 >Model generation, solver workflows, post-processing and
                 optimization.</span
@@ -496,7 +746,8 @@
               <h4>Optimization &amp; machine learning</h4>
               <p>
                 Gaussian processes · Sparse variational GPs<br />Bayesian
-                optimization · Trust-region methods<br />Design of Experiments
+                optimization · Trust-region methods<br />BoTorch / GPyTorch ·
+                Design of Experiments
               </p>
               <span
                 >Sample-efficient search under expensive structural
